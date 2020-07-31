@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+        table {
+            /* Table을 그릴 때 테두리 선을 간격없이 단선으로 */
+            border-collapse: collapse;
+            border-spacing: 0;
+            /* 위의 두가지 옵션은 따라다닌다고 생각하면 된다. */
+
+            /* box model tag 테두리 선의 두께, 모양, 색깔을 지정 */
+            border: 1px solid blue;
+            width: 95%;
+            
+            /*
+			 top, bottom은 margin을 5px 적용하고, 좌우는 자동으로 여백을 유지하여 Content를 중앙 정렬하라
+			 
+			 Box Layout에 다른 Box를 포함하면서 내부의 Box를 좌우 중앙정렬할 때 사용하는 패턴코드 
+			*/
+            margin: 5px auto;
+        }
+
+        /*
+        여러개의 selector에 공통으로 style을 지정할 때는 selectorfmf 콤마(,)로 나열하면 된다.
+        */
+        th, td{
+            border: 1px solid #ccc;
+            padding: 8px 8px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 5px;
+            padding-right: 5px;
+
+            text-align: left;
+        }
+
+        tr{
+            border-bottom: 1px solid #ddd;
+        }
