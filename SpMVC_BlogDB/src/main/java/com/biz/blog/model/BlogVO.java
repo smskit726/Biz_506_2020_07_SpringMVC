@@ -13,7 +13,11 @@ import lombok.ToString;
 @NoArgsConstructor
 public class BlogVO {
 
-	private String title;
-	private String content;
-	private String user;
+	private long bl_seq;
+	private String bl_user;
+	private String bl_title;
+	private String bl_contents;
+	
+	private String bl_date;
+	private String bl_time;
 }
