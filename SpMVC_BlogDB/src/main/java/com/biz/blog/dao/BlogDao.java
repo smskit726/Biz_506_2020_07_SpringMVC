@@ -12,6 +12,7 @@ public interface BlogDao {
 	// 데이터는 절대 2개이상 나오지 않는다 -> 반드시 1개만 나온다
 	// return type이 절대 List형이 아니다.
 	public BlogVO findBySeq(long seq);
+	public BlogVO findBySeq(String seq);
 	
 	// 제목으로 검색하기
 	// PK칼럼이 아닌 나머지 칼럼을 대상으로 조회를 하면
