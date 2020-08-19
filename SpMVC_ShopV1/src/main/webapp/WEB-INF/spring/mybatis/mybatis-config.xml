@@ -6,7 +6,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias 
-			type="com.biz.shop.model.productVO" 
+			type="com.biz.shop.model.ProductVO" 
 			alias="ProVO"/>
 	</typeAliases>
 </configuration>
