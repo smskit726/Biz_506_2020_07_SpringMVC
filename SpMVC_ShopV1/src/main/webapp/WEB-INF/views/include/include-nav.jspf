@@ -17,7 +17,7 @@ ul {
 
 ul li {
 	list-style-type: none;
-	padding: 20px;
+	padding: 15px;
 	color: white;
 }
 
@@ -33,7 +33,7 @@ ul li:hover {
 div.toggle {
 	color: white;
 	width: 100%;
-	padding: 10px 20px;
+	padding: 10px 15px;
 	text-align: right;
 	font-size: 20px;
 	display: none;
@@ -75,7 +75,7 @@ div.toggle {
 		$("nav ul li").click(function(){
 			var text = $(this).text();
 			if(text=="상품관리"){
-				document.location.href = "${rootPath}/product/insert"
+				document.location.href = "${rootPath}/product/"
 			} else if(text == "거래처관리"){
 				document.location.href = "${rootPath}/dept/list"
 			} else if(text=="Home") {

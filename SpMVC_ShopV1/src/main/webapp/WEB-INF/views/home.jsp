@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
-<title>나의 홈페이지</title>
+<title>빛나리 쇼핑몰</title>
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://kit.fontawesome.com/4f95742a0c.js" crossorigin="anonymous"></script>
 <style>
@@ -17,12 +17,24 @@
             padding: 0;
         }
         
+        html, body {
+        height: 100%;
+        }
+        
         body {
 		background-color: rgb(231, 213, 167);
 		}
         
         header {
-        background-color: goldenrod;
+        display: flex;
+        flex-flow: column;
+        background-image: url("${rootPath}/static/images/balloon.jpg");
+        background-position: center;
+    	background-repeat: no-repeat;
+    	background-size: 100%;
+    	justify-content: center;
+    	align-items: center;
+    	height: 15%;
         color: white;
         text-align: center;
         padding: 1.5rem;
@@ -44,7 +56,10 @@
 	
 		<c:choose>
 			<c:when test= "${BODY=='PRO_WRITE'}">
-				<%@ include file="/WEB-INF/views/product/product_write.jspf" %>
+				<%@ include file="/WEB-INF/views/component/product/product_write.jspf" %>
+			</c:when>
+			<c:when test="${BODY== 'PRO_HOME'}">
+				<%@ include file="/WEB-INF/views/component/product/product_list.jspf" %>
 			</c:when>
 			<c:when test= "${BODY=='DEPT_LIST'}">
 				<h3>거래처 리스트</h3>
