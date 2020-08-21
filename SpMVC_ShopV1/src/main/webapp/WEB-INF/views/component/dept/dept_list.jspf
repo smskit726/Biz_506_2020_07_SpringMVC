@@ -20,21 +20,23 @@
 <table>
 	<thead>
 		<tr>
-			<th>상품코드</th>
-			<th>상품이름</th>
-			<th>주매입처</th>
-			<th>매입가격</th>
-			<th>판매가격</th>
+			<th>거래처코드</th>
+			<th>거래처명</th>
+			<th>대표자명</th>
+			<th>전화번호</th>
+			<th>주소</th>
+			<th>담당자</th>
+			<th>담당자연락처</th>
 		</tr>
 	</thead>
 	
 	<tbody>
-		<c:forEach items="${PRO_LIST}" var="VO">
-			<%@ include file="/WEB-INF/views/component/product/product_item.jspf" %>
+		<c:forEach items="${DEPT_LIST}" var="VO">
+			<%@ include file="/WEB-INF/views/component/dept/dept_item.jspf"%>
 		</c:forEach>
 	</tbody>
 </table>
 
 <div id="btn_box">
-	<button type="button"><a href = "${rootPath}/product/insert">작성</a></button>
+	<button type="button"><a href = "${rootPath}/dept/insert">작성</a></button>
 </div>

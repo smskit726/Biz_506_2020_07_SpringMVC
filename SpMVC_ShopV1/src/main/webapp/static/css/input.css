@@ -31,6 +31,11 @@ input {
 	border: 1px solid gray;
 }
 
+a {
+	text-decoration : none;
+	color: inherit;
+}
+
 #btn_box {
 	text-align: right;
 	width: 90%;
@@ -46,11 +51,11 @@ input {
 }
 
 #btn_box button:first-child {
-	background-color: yellowgreen;
+	background-color: brown;
 }
 
 #btn_box button:last-child {
-	background-color: yellowgreen;
+	background-color: brown;
 }
 
 #btn_box button:hover {
