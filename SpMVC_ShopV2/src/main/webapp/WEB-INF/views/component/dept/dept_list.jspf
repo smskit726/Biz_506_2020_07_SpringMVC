@@ -36,7 +36,3 @@
 		</c:forEach>
 	</tbody>
 </table>
-
-<div id="btn_box">
-	<button type="button"><a href = "${rootPath}/dept/insert">작성</a></button>
-</div>

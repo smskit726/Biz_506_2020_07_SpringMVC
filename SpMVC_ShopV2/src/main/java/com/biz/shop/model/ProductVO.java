@@ -20,6 +20,14 @@ public class ProductVO {
 	private int p_iprice;	//	number
 	private int p_oprice;	//	number
 	private String p_image;	//	nvarchar2(125)
+	
+	// DB연동을 할 때 CHAR(1) TinyInt 형으로 선언된 칼럼과 연동하기위해 사용하는 type이다.
+	// 이 type은 0 ~ 255, -128 ~ 127까지의 값만을 저장하는 데이터
+	// 메모리 공간 크기가 1byte(8bit)
+	// int형은 java에서 4byte 크기를 사용한다.
+	// String형은 wrapper클래스이다 보니 실제적으로 상당히 큰 메모리 공간을 차지한다.
+	// 단순히 Flag와 같은 데이터를 취급할 때는 char -> byte형으로 사용하면 메모리를 절약할 수 있다.
+	private byte p_not_use;
 
 
 }

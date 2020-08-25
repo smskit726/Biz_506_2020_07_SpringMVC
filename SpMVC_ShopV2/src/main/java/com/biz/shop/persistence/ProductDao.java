@@ -10,7 +10,7 @@ public interface ProductDao extends GenericDao<ProductVO, String>{
 	
 	
 	
-	@Select("SELECT * FROM tbl_product ORDER BY p_code")
+	@Select("SELECT * FROM tbl_product WHERE p_not_use IS NULL ORDER BY p_code")
 	@Override
 	public List<ProductVO> selectAll();
 
@@ -23,7 +23,7 @@ public interface ProductDao extends GenericDao<ProductVO, String>{
 	@Select("SELECT MAX(p_code) FROM tbl_product")
 	public String maxPCode();
 	
-	@Select("SELECT * FROM tbl_product WHERE p_code = RPAD(#{id},6,' ')")  //||'  '")
+	@Select("SELECT * FROM tbl_product WHERE p_not_use IS NULL AND p_code = RPAD(#{id},6,' ')")  //||'  '")
 	@Override
 	public ProductVO findById(String id);
 

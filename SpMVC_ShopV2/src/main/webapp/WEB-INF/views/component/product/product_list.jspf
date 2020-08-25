@@ -81,10 +81,14 @@
 			//alert(p_code)
 			
 			// 위의 코드와 같은 기능
-			//const p_code1 = $(this).data("pcode")
+			//const p_code1 = $(this).data("p_code")
 			//alert(p_code1)
 			
-			document.location.href="${rootPath}/product/detail?p_code=" + p_code
+			// 문자열 템플릿
+			// ES6(ESCMA 2015)에서는 백틱(`)을 사용하여 변수명과 문자열을 합성할 수 있다
+			// =`${rootPath}/product/detail?id=${p_code}`
+			// 하지만 JSP에서는 EL tag와 문법충돌로 인하여 사용이 불가능하다
+			document.location.href="${rootPath}/product/detail?id=" + p_code //보안상 p_code 보다는 id or seq 등으로 쓰는것이 좋다!
 		})
 	})
 </script>
