@@ -27,7 +27,17 @@ public class ProductVO {
 	// int형은 java에서 4byte 크기를 사용한다.
 	// String형은 wrapper클래스이다 보니 실제적으로 상당히 큰 메모리 공간을 차지한다.
 	// 단순히 Flag와 같은 데이터를 취급할 때는 char -> byte형으로 사용하면 메모리를 절약할 수 있다.
-	private byte p_not_use;
+	
+	/*
+	 * DB p_not_use 칼럼의 값이 NULL(IS NULL) 이면 정상적인 데이터이고
+	 * NULL이 아니면(IS NOT NULL)이면 삭제된 데이터로 취급하기로 하였다.
+	 * UPDATE를 수행할 때 해당VO의 칼럼에 값이 null이면 jdbcType.VARCHAR, config에 수행한 설정때문에
+	 * DB에 UPDATE할 때 NULL이 아닌 다른 값이 저장되어버린다.
+	 * Dao.update() 수행하기 전에 VO에 해당 칼럼의 값을 강제로 NULL로 해줄 필요가 있다.
+	 * 하지만 기본형(primitive)인 변수는 NULL을 저장하여 DB로 보낼 수 없다.
+	 * 때문에 이 칼럼에 타입을 byte형이 아닌 Byte(Wrapper Class)로 설정한다. 
+	 */
+	private Byte p_not_use;
 
 
 }

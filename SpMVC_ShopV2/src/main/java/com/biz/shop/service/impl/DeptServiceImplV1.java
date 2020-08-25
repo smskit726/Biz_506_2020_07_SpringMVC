@@ -25,7 +25,8 @@ public class DeptServiceImplV1 implements DeptService{
 
 	@Override
 	public DeptVO findById(String id) {
-		return null;
+		
+		return deptDao.findById(id);
 	}
 
 	@Override
@@ -49,6 +50,24 @@ public class DeptServiceImplV1 implements DeptService{
 	@Override
 	public int delete(String id) {
 		return 0;
+	}
+
+	@Override
+	public String getDCode() {
+		
+		String retDCode = "D001";
+		
+		try {
+			String maxCode = deptDao.maxDCode();
+			String preCode = maxCode.substring(0,1);
+			int dcode = Integer.valueOf(maxCode.substring(1)) + 1;
+		
+			retDCode = String.format("%s%03d", preCode, dcode);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return retDCode;
 	}
 
 }

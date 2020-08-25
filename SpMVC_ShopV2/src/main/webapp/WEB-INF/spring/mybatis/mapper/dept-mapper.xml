@@ -5,13 +5,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="com.biz.shop.persistence.DeptDao">
- 
-	<select id="selectAll" resultType="DeptVO">
- 		SELECT * FROM tbl_dept ORDER BY D_CODE
- 	</select>
- 	
- 	<select id="findById"></select>
- 	
+  	
+  	<select id="selectAll" resultType="DeptVO">
+  		SELECT * FROM tbl_dept WHERE d_not_use IS NULL ORDER BY d_code
+  	</select>
+  	
+  	<select id="findById" resultType="DeptVO">
+  		SELECT * FROM tbl_dept WHERE d_code = #{id}
+  	</select>
+  	
  	<insert id="insert">
  		INSERT INTO tbl_dept(
 	 				D_CODE,

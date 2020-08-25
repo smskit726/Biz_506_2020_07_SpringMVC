@@ -19,4 +19,5 @@ public class DeptVO {
 	private String d_address;
 	private String d_manager;
 	private String d_mn_tel;
+	private Byte d_not_use;
 }
