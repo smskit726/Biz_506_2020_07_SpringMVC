@@ -139,3 +139,6 @@ typings/
 .env
 .metadata/
 RemoteSystemsTempFiles/
+
+# Naver API Key
+NaverSecret.*
