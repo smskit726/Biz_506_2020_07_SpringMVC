@@ -1,5 +1,7 @@
 package com.biz.book.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,6 +15,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@XmlRootElement(name="channel")
 public class BookVO {
 	// NaverBook.txt. 파일 참조
 	private String title;
