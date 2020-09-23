@@ -28,7 +28,7 @@ public class BooksController {
 		
 		model.addAttribute("BOOKS", bookList);
 		
-		return "books/list";
+		return "books/book-list";
 	}
 	
 	@RequestMapping(value = "/input", method=RequestMethod.GET)
@@ -38,6 +38,6 @@ public class BooksController {
 		// Mapping method를 호출할 때 사용했던 mapping URL.jsp 형식의 return문이 자동으로 생성된다.
 		// return null;
 		
-		return "books/write";
+		return "books/book-write";
 	}
 }
