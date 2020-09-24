@@ -3,8 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <c:set var = "rootPath" value="${pageContext.request.contextPath}"/>
-<link href="${rootPath}/static/css/book-write.css?ver=0924" rel="stylesheet"/>
-<script src="${rootPath}/static/js/book-write.js?ver=0924"></script>
+<link href="${rootPath}/static/css/book-write.css?ver=0924_2" rel="stylesheet"/>
+<script src="${rootPath}/static/js/book-write.js?ver=0924_2"></script>
 
 <h3>도서정보 등록</h3>
 <form:form id="books" modelAttribute="bookVO">

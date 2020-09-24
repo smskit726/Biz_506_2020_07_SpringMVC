@@ -6,12 +6,21 @@
  <mapper namespace="com.biz.book.mapper.BookDao">
  
  	<select id="selectAll" resultType="BookVO">
- 		SELECT * FROM tbl_books
+ 		SELECT * FROM tbl_books ORDER BY seq
  	</select>
  	<select id="findById" resultType="BookVO">
  		SELECT * FROM tbl_books WHERE seq = #{seq}
  	</select>
- 	<insert id="insert"></insert>
+ 	
+ 	<insert id="insert">
+ 	 	INSERT INTO tbl_books (
+		 	seq, title, link, image, author, price, discount, publisher,
+			isbn, description,	pubdate, buydate, buyprice, buystore
+	 	) VALUES (
+		 	SEQ_BOOKS.NEXTVAL, #{title}, #{link}, #{image},	#{author}, #{price}, #{discount},
+			#{publisher}, #{isbn}, #{description}, #{pubdate}, #{buydate}, #{buyprice}, #{buystore}
+		)
+ 	</insert>
  	<update id="update"></update>
  	<delete id="delete"></delete>
  

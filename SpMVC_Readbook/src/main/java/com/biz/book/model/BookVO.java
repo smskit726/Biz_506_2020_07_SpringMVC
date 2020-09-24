@@ -18,6 +18,7 @@ import lombok.ToString;
 @XmlRootElement(name="channel")
 public class BookVO {
 	// NaverBook.txt. 파일 참조
+	private long seq;
 	private String title;
 	private String link;
 	private String image;

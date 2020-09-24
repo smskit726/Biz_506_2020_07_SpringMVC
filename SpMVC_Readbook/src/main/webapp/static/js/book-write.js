@@ -1,4 +1,10 @@
 $(function () {
+  $("section#book-modal").css("display", "none");
+  $("#btn-save").click(function () {
+    // naver로부터 조회한 도서정보를 저장하기 위해
+    // 유효성검사는 일단 생략한다.
+    $("#form").submit();
+  });
   $("#naver-search").click(function () {
     let title = $("#title").val();
     if (title === "") {
@@ -11,7 +17,7 @@ $(function () {
     $.ajax({
       // ajax로 서버의 /naver/search URL에 POST로 요청을 하면서
       // search_text 변수에 title 변수에 담긴 값을 담아서 전달하고
-      url: "${rootPath}/naver/search",
+      url: `${rootPath}/naver/search`,
       method: "POST",
       data: { search_text: title },
       // 서버가 데이터 조회를 수행한 후 view(HTML code) 코드를 return 하면 그 결과를
@@ -63,7 +69,7 @@ $(function () {
 
     //alert(isbn)
     $.ajax({
-      url: "${rootPath}/api/isbn",
+      url: `${rootPath}/api/isbn`,
       method: "POST",
       data: { search_text: isbn },
     })
@@ -77,18 +83,19 @@ $(function () {
         $("#price").val(bookVO.price);
         $("#discount").val(bookVO.discount);
         $("#publisher").val(bookVO.publisher);
-        $("#isbn").val(bookVO.isbn);
+
+        let isbn = bookVO.isbn;
+        // isbn 변수에 들어있는 문자열중에서 html tag 구조를 가진 단어가 있으면 무조건 제거하라
+        isbn = isbn.replace(/(<([^>]+)>)/gi, "");
+        isbn = isbn.substring(isbn.length - 13);
+        $("#isbn").val(isbn);
+
         $("#description").val(bookVO.description);
         $("#pubdate").val(bookVO.pubdate);
-        $("#buydate").val(bookVO.buydate);
-        $("#buyprice").val(bookVO.buyprice);
-        $("#buystore").val(bookVO.buystore);
         $("section#book-modal").css("display", "none");
       })
       .fail(function (xhr, textStatus, error) {
         alert("서버 통신 오류");
       });
   });
-
-  $("section#book-modal").css("display", "none");
 });
