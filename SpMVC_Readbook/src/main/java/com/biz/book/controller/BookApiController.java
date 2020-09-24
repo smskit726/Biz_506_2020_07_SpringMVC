@@ -40,7 +40,7 @@ public class BookApiController {
 		 * 첫번째 데이터만 추출한다!
 		 */
 		BookVO bookVO = nService.getNaverList(queryURL).get(0);
-		log.debug("도서정보>>>>>>>>>>>>>> " +  bookVO.toString());
+		log.debug("도서정보 >>>>>>>>>>>>>> " +  bookVO.toString());
 		
 		return bookVO;
 	}
