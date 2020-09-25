@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ public class BooksController {
 	@Autowired
 	private BookDao bookDao;
 	
+	@Transactional
 	// localhost:8080/book/books
 	// localhost:8080/book/books/
 //	@ResponseBody
@@ -83,7 +85,7 @@ public class BooksController {
 		log.debug("PATH :{} ",id);
 		long seq = Long.valueOf(id);
 		BookVO bookVO = bookDao.findById(seq);
-//		log.debug(bookVO.toString());
+		log.debug(bookVO.toString());
 		
 		model.addAttribute("BOOKVO",bookVO);
 		model.addAttribute("BODY","BOOK-DETAIL");

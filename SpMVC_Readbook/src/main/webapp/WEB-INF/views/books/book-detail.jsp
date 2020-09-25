@@ -38,7 +38,7 @@ table#book-detail .dummy {
 
 table#book-detail .desc-title th {
 	text-align: left;
-	padding-left: 10px 30px;
+	padding: 10px 30px;
 	color: white;
 	background-color: green;
 }
