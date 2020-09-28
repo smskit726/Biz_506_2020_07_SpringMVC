@@ -81,6 +81,16 @@ nav#main-nav {
   color: coral;
 }
 
+/* button이 가지는 고유한 모양을 모두 제거하고 버튼 성질만 남기기 */
+#main-nav button {
+  background: transparent;
+  color: inherit;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  font: inherit;
+}
+
 section#main-section {
   height: 1000px;
 }

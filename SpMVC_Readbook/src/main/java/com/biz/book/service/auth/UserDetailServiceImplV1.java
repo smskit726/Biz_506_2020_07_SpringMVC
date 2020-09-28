@@ -10,6 +10,7 @@ import com.biz.book.mapper.UserDao;
 import com.biz.book.model.UserDetailsVO;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /*
  * spring security 프로젝트에서 사용자 인가와 권한을 관리하는 클래스
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
  * 어떤 회사에 솔루션을 판매하면서 회사의 실정, 업무환경, 여러가지 요인들을 요구분석하여
  * 솔루션을 사용하는 회사에 최적화하는 것
  */
+@Slf4j
 @RequiredArgsConstructor
 @Service("userDetailServiceV1")
 public class UserDetailServiceImplV1 implements UserDetailsService{
@@ -55,15 +57,18 @@ public class UserDetailServiceImplV1 implements UserDetailsService{
 		// TODO Auto-generated method stub
 		UserDetailsVO userDetail = userDao.findById(username);
 		
-		userDetail = UserDetailsVO.builder()
-								  .username(username)
-								  .password("12341234")
-								  .isEnabled(true).build();
+//		userDetail = UserDetailsVO.builder()
+//								  .username(username)
+//								  .password("12341234")
+//								  .enabled(true).build();
 		
 		if(userDetail == null) {
 			// 강제로 일부러 UsernameNotFoundException을 발생시킨다
 			throw new UsernameNotFoundException(username + "정보를 찾을 수 없음");
 		}
+		
+		log.debug("USER:" + userDetail.toString());
+		userDetail.setEnabled(true);
 		
 		return userDetail;
 	}

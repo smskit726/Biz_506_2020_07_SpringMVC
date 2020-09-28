@@ -1,7 +1,6 @@
 package com.biz.book.auth;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.biz.book.model.AuthorityVO;
 import com.biz.book.model.UserDetailsVO;
@@ -38,6 +38,9 @@ public class AuthProviderImpl implements AuthenticationProvider{
 	@Autowired
 	@Qualifier("userDetailServiceV1")
 	private UserDetailsService userService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	/*
 	 * 사용자가 로그인을 수행했을 때 username과, password를 주입받아서 정상적인 사용자인가를 검사하는 method
 	 */
@@ -52,9 +55,19 @@ public class AuthProviderImpl implements AuthenticationProvider{
 		UserDetailsVO userVO = (UserDetailsVO) userService.loadUserByUsername(username);
 		
 		// 2. password 검사
-		if(!password.equals(userVO.getPassword())) {
-			// paswword가 일치하지 않으면
-			throw new BadCredentialsException("비밀번호 오류");
+		// 비밀번호를 암호화 하지 않았을 경우 문자열 비교하기
+//		if(!password.equals(userVO.getPassword())) {
+//			// paswword가 일치하지 않으면
+//			throw new BadCredentialsException("비밀번호 오류");
+//		}
+		
+		// PasswordEncoder로 암호화된 passoword 비교
+		/*
+		 * 사용자가 입력한 password 평문 문자열을 내부에서 암호화하여 DB에 저장되어 있는 암호화된
+		 * password(userVO.getPassword())을 비교하여 일치하는지 검사한다
+		 */
+		if(!passwordEncoder.matches(password, userVO.getPassword())) {
+			throw new BadCredentialsException("비밀번호가 일치하지 않음");
 		}
 		
 		// 3. 유효한 사용자 정보인가?
@@ -83,8 +96,9 @@ public class AuthProviderImpl implements AuthenticationProvider{
 
 	@Override
 	public boolean supports(Class<?> authentication) {
-		// TODO Auto-generated method stub
-		return false;
+		// supports()의 return 값이 false이면 ...Token을 사용하지 않겠다.
+		// 반드시 여기를 true로 해주어야 한다.
+		return true;
 	}
 
 }
