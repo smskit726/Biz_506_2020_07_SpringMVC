@@ -3,6 +3,7 @@ package com.biz.book.service.auth;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.biz.book.mapper.AuthorityDao;
 import com.biz.book.mapper.UserDao;
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
  * 솔루션을 사용하는 회사에 최적화하는 것
  */
 @RequiredArgsConstructor
+@Service("userDetailServiceV1")
 public class UserDetailServiceImplV1 implements UserDetailsService{
 
 	/*
@@ -53,7 +55,13 @@ public class UserDetailServiceImplV1 implements UserDetailsService{
 		// TODO Auto-generated method stub
 		UserDetailsVO userDetail = userDao.findById(username);
 		
+		userDetail = UserDetailsVO.builder()
+								  .username(username)
+								  .password("12341234")
+								  .isEnabled(true).build();
+		
 		if(userDetail == null) {
+			// 강제로 일부러 UsernameNotFoundException을 발생시킨다
 			throw new UsernameNotFoundException(username + "정보를 찾을 수 없음");
 		}
 		

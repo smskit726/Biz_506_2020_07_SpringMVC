@@ -47,6 +47,12 @@ table#book-detail .link th, table#book-detail .link td {
 	background-color: #ccc;
 	padding: 10px;
 }
+
+section#read-book-body {
+	width:60%;
+	border: 1px solid green;
+	margin: 5px auto;
+}
 </style>
 
 <table id="book-detail">
@@ -96,3 +102,6 @@ table#book-detail .link th, table#book-detail .link td {
 		<th colspan="2">구입일 : ${BOOKVO.buydate} | 구입가격 : ${BOOKVO.buyprice} | 구입처 : ${BOOKVO.buystore}</th>
 	</tr>
 </table>
+<section id="read-book-body">
+	<%@ include file="/WEB-INF/views/read-book/read-book-write.jsp"%>
+</section>
