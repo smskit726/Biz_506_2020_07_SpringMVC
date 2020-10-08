@@ -1,6 +1,12 @@
 package com.biz.book.controller;
 
+import java.security.Principal;
+
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -92,10 +98,15 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping(value = "/mypage" )
+	@RequestMapping(value = "/mypage", method= RequestMethod.GET)
 	public String mypage(@ModelAttribute("memberVO") UserDetailsVO userVO, Authentication authProvider, Model model) {
 		
 		// 현재로그인한 사용자의 정보를 추출하는 method
+		/*
+		 * Spring Security 를 통과하여 login이 인가된 사용자의 정보는 현재 method가 호출될때 spring security의 Filter Chain에 의해서
+		 * method의 매개변수로 설정된 Authentication 클래스로 선언된 객체에 담겨서 전달이 된다.
+		 * 객체에서 getPrincipal() method를 호출하여 데이터를 UserDetailsVO의 userVO 객체에 담아 일반 userVO(memberVO)처럼 취급하여 사용할 수 있다.
+		 */
 		userVO = (UserDetailsVO) authProvider.getPrincipal();
 		userVO.setPassword("");
 		
@@ -147,6 +158,30 @@ public class MemberController {
 	@RequestMapping(value = "/logout", method=RequestMethod.GET)
 	public String logout() {
 		return "member/logout";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/user_info", method = RequestMethod.GET)
+	public UserDetailsVO userInfo(Principal principal,Authentication authentication,
+			@AuthenticationPrincipal @ModelAttribute("memberVO")UserDetailsVO userVO,
+			Model model) {
+		
+		// Spring Security Project에서 로그인한 사용자 정보를 추출하는 여러가지 방법
+		// 보안에 가장 유리한 방법은 Authentication을 사용하는 방법이다. ( mypage / get )
+		// 1. UserDetailsServiceImplV1에서 공급받는 방법 (Session 이용, 노출될 위험이 있음)
+		// 서버의 Session Memory에 직접접근하여 사용자 정보를 추출하는 방법으로 보안에 상당히 취약하여 사용을 지양하는 방법
+//		UsernamePasswordAuthenticationToken upa = (UsernamePasswordAuthenticationToken) principal;
+//		userVO = (UserDetailsVO) upa.getPrincipal();
+		
+		// 2. SecurityContextHolder로부터 추출하는 방법
+//		userVO = (UserDetailsVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		// 3. Authentication 클래스를 매개변수로 설정하는 방법 (권장)
+		// @AuthenticationPrincipal 이 작동이 안되는 관계로 매개변수에 Authentication 클래스를 객체로 선언하고
+		// authentication.getPrincipal() method를 호출하여 userVO를 추출하는 방법
+		userVO = (UserDetailsVO) authentication.getPrincipal();
+		
+		return userVO;
 	}
 
 }

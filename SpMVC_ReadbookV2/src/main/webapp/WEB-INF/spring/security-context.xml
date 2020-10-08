@@ -12,6 +12,13 @@
 	<!-- authProvider에서 UserDetailService를 사용해야 하기 때문에 -->
 	<!-- 여기에 UserDetailService 클래스가 있는 패키지를 스캔하도록 설정을 해주어야 한다. -->
 	<context:component-scan base-package="com.biz.book.service.auth"></context:component-scan>
+	
+	<!-- 권한검사를 할 때 prefix 설정하는 클래스 bean -->
+	<!-- 이 클래스를 bean 설정하면서 construct-arg value="" : prefix 제거하는 효과 -->
+	<!-- Security 버전마다 조금씩 차이가 있어서 설정값이 적용이 안되는 경우가 있다 -->
+	<!-- 보통은 설정하지 않고 기본값으로 접두어를 붙여서 사용한다 : ROLE_ADMIN -->
+	<!-- org.springframework.security.config.core.GrantedAuthorityDefaults -->
+	
 		
 	<!-- spring security에서 사용할 AuthenticationProvider를 구현한 클래스를 bean 등록 -->
 	<bean id="customAuthProvider" class="com.biz.book.auth.AuthProviderImpl"/>
@@ -42,11 +49,11 @@
 		<sec:form-login username-parameter="username" password-parameter="password"/>
 		<sec:logout logout-url="/logout" logout-success-url="/" invalidate-session="true"/>
 		
-		<sec:intercept-url pattern="/admin/**" access="hasRole('ADMIN')"/>
-		<sec:intercept-url pattern="/member/mypage" access="hasAnyRole('ADMIN','USER')"/>
-		<sec:intercept-url pattern="/member/password" access="hasAnyRole('ADMIN','USER')"/>
+		<sec:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		<sec:intercept-url pattern="/member/mypage" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
+		<sec:intercept-url pattern="/member/password" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
 		<sec:intercept-url pattern="/member/**" access="permitAll()"/>
-		<sec:intercept-url pattern="/books/**" access="hasAnyRole('ADMIN','USER')"/>
+		<sec:intercept-url pattern="/books/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
 		<sec:intercept-url pattern="/**" access="permitAll()"/>
 	</sec:http>
 	

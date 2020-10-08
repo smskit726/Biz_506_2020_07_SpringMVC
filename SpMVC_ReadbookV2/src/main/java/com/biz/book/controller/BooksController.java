@@ -76,6 +76,8 @@ public class BooksController {
 		// Controller의 Mapping method의 return type이 String 일 때, null 값을 return 하면
 		// Mapping method를 호출할 때 사용했던 mapping URL.jsp 형식의 return문이 자동으로 생성된다.
 		// return null;
+		
+		bookVO = new BookVO();
 		model.addAttribute("BODY", "BOOK-WRITE");
 		model.addAttribute("bookVO", bookVO);
 		return "home";
