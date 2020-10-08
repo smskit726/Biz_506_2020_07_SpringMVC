@@ -71,6 +71,7 @@
     		<c:when test="${BODY=='MEMBER-UPDATE-NEXT'}">
     			<%@ include file="/WEB-INF/views/member/member-update2.jsp" %>
     		</c:when>
+    			
     		<c:otherwise>
     			<%@ include file="/WEB-INF/views/main-body.jsp" %>
     		</c:otherwise>
