@@ -1,0 +1,87 @@
+@charset "UTF-8";
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  position: relative;
+  height: 400px;
+  color: white;
+
+  background-image: url("../images/tile.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+header h2 {
+  font-weight: 500;
+  text-shadow: -2px 2px rgb(255, 102, 0), 0 2px rgb(255, 102, 0),
+    1px 0 rgb(255, 102, 0), 0 -1px rgb(255, 102, 0);
+}
+
+nav#main-nav {
+  position: sticky;
+  top: 0;
+}
+nav#main-nav ul {
+  list-style: none;
+  display: flex;
+  background-color: goldenrod;
+}
+
+nav#main-nav li {
+  padding: 8px 16px;
+  margin: 0px 5px;
+  color: white;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.3s linear;
+}
+
+nav#main-nav li:hover {
+  border-bottom: 3px solid green;
+}
+
+nav#main-nav li:nth-child(3) {
+  margin-left: auto;
+}
+
+section#content {
+  /*
+  html, body의 height : 100%로 설정하고
+  body를 flex로 설정, flex-direction: colum 으로 설정
+  header, nav, content, footer를 각각 배열하고
+  content가 있는 box에만 flex:1로 설정하면 height가 전체 가득 찬 레이아웃이 만들어진다.
+  */
+  flex: 1;
+
+  /* 내용이 넘어가면 자동으로 스크롤바를 생성*/
+  overflow: auto;
+}
+
+footer {
+  background-color: brown;
+  color: white;
+  text-align: center;
+  padding: 0.5rem;
+}
