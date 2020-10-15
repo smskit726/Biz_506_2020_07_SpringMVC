@@ -74,12 +74,13 @@ section#content {
   content가 있는 box에만 flex:1로 설정하면 height가 전체 가득 찬 레이아웃이 만들어진다.
   */
   flex: 1;
-
+  /* height: 1000px; */
   /* 내용이 넘어가면 자동으로 스크롤바를 생성*/
-  overflow: auto;
+  /* overflow: auto; */
 }
 
 footer {
+  flex-shrink: 0;
   background-color: brown;
   color: white;
   text-align: center;
