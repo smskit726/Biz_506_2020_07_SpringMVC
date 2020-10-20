@@ -4,5 +4,5 @@
 <c:set var = "rootPath" value="${pageContext.request.contextPath}"/>
 
 <footer>
-	<address>CopyRight &copy; smskit726@gmail.com</address>
+	<address style="margin:0;">CopyRight &copy; smskit726@gmail.com</address>
 </footer>

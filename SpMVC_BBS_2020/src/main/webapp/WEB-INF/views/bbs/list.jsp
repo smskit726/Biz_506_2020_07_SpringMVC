@@ -6,8 +6,27 @@
 	document.addEventListener("DOMContentLoaded", function(){
 		document.querySelector("#bbs-write").addEventListener("click", function(){
 			document.location.href="${rootPath}/bbs/write"
+		});
+		
+		document.querySelector("table").addEventListener("click", function (event) {
+		    let tag_name = event.target.tagName;
+		    if(tag_name ==="TD"){
+		    	let seq = event.target.dataset.seq;
+		    	if(seq){
+		    		document.location.href="${rootPath}/bbs/detail/" + seq;
+		    	}
+		    }
+		});
+	})
+	
+	/*
+	$(function(){
+		$(".bbs-item").click(function(){
+			let seq = $(this).data("seq")
+			document.location.href = "${rootPath}/bbs/detail/" + seq;
 		})
 	})
+	*/
 </script>
 <style>
 
@@ -21,6 +40,13 @@
 		border-radius: 5px;
 		padding: 5px 10px;
 		margin: 5px;
+	}
+	
+	td.bbs-subject {
+		cursor: pointer;
+	}
+	td.bbs-subject:hover {
+		background-color: #ccc;
 	}
 </style>
 <table class="table table-striped table-bordered table-hover">
@@ -40,12 +66,15 @@
 			<tr><td colspan="6">데이터가 없습니다.</td></tr>
 		</c:if>
 		<c:forEach items="${BBS_LIST}" var="vo" varStatus="i">
-			<tr>
+			<tr class="bbs-item" data-seq="${vo.b_seq}">
 					<td>${i.count}</td>
 					<td>${vo.b_date}</td>
 					<td>${vo.b_time}</td>
 					<td>${vo.b_writer}</td>
-					<td>${vo.b_subject}</td>
+					<td data-seq="${vo.b_seq}" class="bbs-subject">
+						${vo.b_subject}
+						<img src="${rootPath}/upload/${vo.b_file}" width="50px">
+					</td>
 					<td>${vo.b_count}</td>
 			</tr>
 		</c:forEach>

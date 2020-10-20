@@ -2,26 +2,35 @@ package com.biz.bbs.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.biz.bbs.model.BbsVO;
 import com.biz.bbs.service.BbsService;
+import com.biz.bbs.service.FileService;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Controller
+//@RequiredArgsConstructor
 @RequestMapping(value = "/bbs")
-@RequiredArgsConstructor
+@Controller
 public class BbsController {
 
 	@Qualifier("bbsServiceV1")
-	private final BbsService bbsService;
+	@Autowired
+	private BbsService bbsService;
+	
+	@Qualifier("fileServiceV4")
+	@Autowired
+	private FileService fileService;
 	/*
 	 * return문에 bbs/list 문자열이 있으면
 	 * 1. tiles-layout.xml에서 bbs/list로 설정된 항목을 검사
@@ -36,24 +45,36 @@ public class BbsController {
 	public String list(Model model) {
 		List<BbsVO> bbsList = bbsService.selectAll();
 		model.addAttribute("BBS_LIST",bbsList);
-		return "bbs/list";
+		return "/bbs/list";
 	}
 	
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public String write() {		
-		return "bbs/write";
+		return "/bbs/write";
 	}
 	
+	/*
+	 * form에서 보낸 파일 받기
+	 * MultipartFile 클래스를 매개변수로 설정하여 파일을 받기
+	 * 이 클래스에 @RequestParam(이름) : 이름 = form에서 input type=file로 설정된
+	 * tag의 name 값
+	 */
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
-	public String write(BbsVO bbsVO) {
+	public String write(BbsVO bbsVO, @RequestParam("file") MultipartFile file) {
 		
+		log.debug("업로드한 파일 >> " + file.getOriginalFilename());
+		String fileName = fileService.fileUp(file);
+		bbsVO.setB_file(fileName);
 		bbsService.insert(bbsVO);
 		return "redirect:/bbs/list";
 	}
 	
-	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-	public String deetail() {		
-		return "bbs/detail";
+	@RequestMapping(value = "/detail/{seq}", method = RequestMethod.GET)
+	public String deetail(@PathVariable("seq")String seq, Model model) {
+		long long_seq = Long.valueOf(seq);
+		BbsVO bbsVO = bbsService.findBySeq(long_seq);
+		model.addAttribute("BBSVO",bbsVO);
+		return "/bbs/detail";
 	}
 	
 }

@@ -16,9 +16,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <!-- summernote -->
-<link rel="stylesheet" href="${rootPath}/resources/summernote/summernote-bs4.min.css"/>
-<script src="${rootPath}/resources/summernote/summernote-bs4.min.js"></script>
-<script src="${rootPath}/resources/summernote/lang/summernote-ko-KR.min.js"></script>
+<link rel="stylesheet" href="${rootPath}/static/summernote/summernote-bs4.min.css"/>
+<script src="${rootPath}/static/summernote/summernote-bs4.min.js"></script>
+<script src="${rootPath}/static/summernote/lang/summernote-ko-KR.min.js"></script>
 
 <style>
 	* {
@@ -38,12 +38,23 @@
 	}
 	
 	header {
-		background-color: goldenrod;
+		height: 250px;
 		color: white;
-		padding: 1.2rem;
-		text-align: center;
+		background-image: url("${rootPath}/static/images/wood.jpg");
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		background-attachment: fixed;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
 	
+	header h2 {
+		text-shadow: -2px 2px rgb(218, 165, 32), 0 2px rgb(218, 165, 32),
+    1px 0 rgb(218, 165, 32), 0 -1px rgb(218, 165, 32);
+	}
 	nav ul {
 		list-style: none;
 		display: flex;
@@ -71,12 +82,12 @@
 	*/
 	section#content {
 		flex: 1;
-		overflow: auto;
+		/*overflow: auto;*/
 	}
 	
 	footer {
-		background-color: darkblue;
-		color: white;
+		background-color: rgb(250, 252, 127);
+		color: black;
 		text-align: center;
 		padding: 0.7rem;
 	}

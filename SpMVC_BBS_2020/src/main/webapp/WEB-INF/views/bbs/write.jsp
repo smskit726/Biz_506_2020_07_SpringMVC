@@ -7,6 +7,7 @@
 	form#write-form {
 		width: 80%;
 		margin: 10px auto;
+		
 	}
 	
 	form#write-form fieldset{
@@ -15,6 +16,9 @@
 	}
 	
 	form#write-form legend {
+		width:10%;
+		text-align:center;
+		font-size: 15pt;
 		color: darkblue;
 		margin: 5px;
 		padding: 5px;
@@ -93,7 +97,7 @@
 				})
 	})
 </script>
-<form id="write-form" method="POST">
+<form id="write-form" method="POST" enctype="multipart/form-data">
 	<fieldset>
 		<legend>글쓰기</legend>
 		<div>
@@ -112,8 +116,14 @@
 			<label for="b_subject">제목</label>
 			<input name="b_subject">
 		</div>
-		<div style="display:flex; justify-content: center;">
+		
+		<div style="display:flex; justify-content: center; padding: 5px;">
 			<textarea id="b_content" rows="5" cols="20" name="b_content"></textarea>
+		</div>
+		
+		<div style="margin-top: 10px;">
+			<label for="file">이미지</label>
+			<input name="file" type="file" accept="image/*">
 		</div>
 		
 		<div class="btn-box">
