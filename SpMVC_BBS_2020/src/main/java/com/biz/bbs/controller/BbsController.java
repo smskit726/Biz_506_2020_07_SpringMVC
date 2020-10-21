@@ -28,9 +28,6 @@ public class BbsController {
 	@Autowired
 	private BbsService bbsService;
 	
-	@Qualifier("fileServiceV4")
-	@Autowired
-	private FileService fileService;
 	/*
 	 * return문에 bbs/list 문자열이 있으면
 	 * 1. tiles-layout.xml에서 bbs/list로 설정된 항목을 검사
@@ -41,12 +38,20 @@ public class BbsController {
 	 * 6. 결국 bbs/list라고 return된 문자열은 list.jsp파일을 읽어서
 	 * 7. rendering 하는 용도로 사용된다.
 	 */
+	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
 		List<BbsVO> bbsList = bbsService.selectAll();
 		model.addAttribute("BBS_LIST",bbsList);
 		return "/bbs/list";
 	}
+
+	/*
+	@RequestMapping(value = "/{seq}/list", method = RequestMethod.GET)
+	public String list() {
+		return "redirect:/bbs/list";
+	}
+	*/
 	
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public String write() {		
@@ -63,18 +68,40 @@ public class BbsController {
 	public String write(BbsVO bbsVO, @RequestParam("file") MultipartFile file) {
 		
 		log.debug("업로드한 파일 >> " + file.getOriginalFilename());
-		String fileName = fileService.fileUp(file);
-		bbsVO.setB_file(fileName);
-		bbsService.insert(bbsVO);
+		bbsService.insert(bbsVO, file);
 		return "redirect:/bbs/list";
 	}
 	
 	@RequestMapping(value = "/detail/{seq}", method = RequestMethod.GET)
-	public String deetail(@PathVariable("seq")String seq, Model model) {
+	public String detail(@PathVariable("seq")String seq, Model model) {
 		long long_seq = Long.valueOf(seq);
 		BbsVO bbsVO = bbsService.findBySeq(long_seq);
 		model.addAttribute("BBSVO",bbsVO);
 		return "/bbs/detail";
 	}
 	
+	/*
+	@RequestMapping(value = "/{seq}/delete", method=RequestMethod.GET)
+	public String delete(@PathVariable("seq") String seq) {
+		
+		long long_seq = Long.valueOf(seq);
+		bbsService.delete(long_seq);
+		return "redirect:/bbs/list";
+	}
+	*/
+	
+	@RequestMapping(value = "/{seq}/{url}", method=RequestMethod.GET)
+	public String update(@PathVariable("seq") String seq, @PathVariable("url") String url, Model model) {
+		
+		long long_seq = Long.valueOf(seq);
+		String ret_url = "redirect:/bbs/list";
+		
+		if(url.equalsIgnoreCase("DELETE")) {
+			bbsService.delete(long_seq);
+		} else if(url.equalsIgnoreCase("UPDATE")) {
+			model.addAttribute("BBSVO", bbsService.findBySeq(long_seq));
+			ret_url = "/bbs/write";
+		}
+		return ret_url;
+	}
 }

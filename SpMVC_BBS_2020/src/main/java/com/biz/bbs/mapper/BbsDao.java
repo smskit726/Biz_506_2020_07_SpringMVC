@@ -28,6 +28,6 @@ public interface BbsDao {
 	@UpdateProvider(type = BbsSQL.class, method = "bbs_update")
 	public int update(BbsVO bbsVO);
 	
-	@Delete("DELETE FROM tbl_bbs WHERER b_seq=#{seq}")
+	@Delete("DELETE FROM tbl_bbs WHERE b_seq=#{seq}")
 	public int delete(long seq);
 }

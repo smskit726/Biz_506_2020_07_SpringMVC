@@ -13,6 +13,8 @@ section#bbs-detail-header {
 }
 section#bbs-detail-header article:first-child {
 	flex: 1;
+	text-align: center;
+	justify-content: center;
 }
 section#bbs-detail-header article:last-child {
 	flex: 2;
@@ -51,9 +53,70 @@ section#bbs-detail-body {
 	padding: 20px;
 }
 
+section#bbs-btn-box {
+	width: 50%;
+	text-align: right;
+	margin: 10px auto;
+}
+
+section#bbs-btn-box button {
+	margin: 10px;
+	padding: 10px 16px;
+	border: none;
+	border-radius: 5px;
+	outline: none;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+section#bbs-btn-box button:hover {
+	box-shadow: 2px 2px 2px rgba(0,0,0,0.6);
+}
+
+section#bbs-btn-box button:nth-child(1) {
+	background-color: burlywood;
+}
+section#bbs-btn-box button:nth-child(2) {
+	background-color: coral;
+}
+section#bbs-btn-box button:nth-child(3) {
+	background-color: orange;
+}
 </style>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+	document.querySelector("section#bbs-btn-box").addEventListener("click", function(e){
+		let url = "${rootPath}/bbs/${BBSVO.b_seq}/"
+		if(e.target.tagName === 'BUTTON'){
+			
+			/*
+			게시글 삭제를 요청하면(삭제버튼 클릭하면)
+			ajax를 사용하여 서버에 DELETE method type으로 삭제를 요청하자
+			*/
+			if(e.target.className == 'delete'){
+				if(confirm("정말 삭제할까요?")){
+					let data = {seq : "${BBSVO.b_seq}"}
+					fetch(
+							"${rootPath}/api/bbs",
+							{ method : "DELETE" },
+							{ headers : { "Content-Type" : "application/json" }, body : JSON.stringify(data) /* JSON 객체데이터를 문자열화하여 HTTP Body에 담기 */ }
+					).then(function(result){
+						alert("성공")
+					}).catch(function(error){
+						alert("실패")
+					})
+					return false;
+				}
+			}
+			document.location.href = url + e.target.className;
+		}
+	})
+})
+</script>
 <section id="bbs-detail-header">
-	<article><img src="${rootPath}/upload/${BBSVO.b_file}" width="200px"></article>
+	<article>
+	<a href="${rootPath}/upload/${BBSVO.b_file}" target="new"><img src="${rootPath}/upload/${BBSVO.b_file}" width="200px"></a>
+	</article>
 	<article>
 		<div class="title">제목</div><div class="content">${BBSVO.b_subject}</div>
 		<div class="title">작성일시</div><div class="content">${BBSVO.b_date}, ${BBSVO.b_time}</div>
@@ -62,4 +125,9 @@ section#bbs-detail-body {
 </section>
 <section id="bbs-detail-body">
 ${BBOVO.b_content}
+</section>
+<section id="bbs-btn-box">
+	<button class="list">리스트</button>
+	<button class="update">수정</button>
+	<button class="delete">삭제</button>
 </section>
