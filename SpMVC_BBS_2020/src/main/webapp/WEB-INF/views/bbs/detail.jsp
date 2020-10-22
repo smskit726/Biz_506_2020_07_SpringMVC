@@ -95,11 +95,15 @@ document.addEventListener("DOMContentLoaded", function(){
 			*/
 			if(e.target.className == 'delete'){
 				if(confirm("정말 삭제할까요?")){
-					let data = {seq : "${BBSVO.b_seq}"}
+					/* JSON 객체데이터를 문자열화하여 HTTP Body에 담기 */
+					let data = { seq : "${BBSVO.b_seq}", subject : "${BBSVO.b_subject}"}
 					fetch(
 							"${rootPath}/api/bbs",
-							{ method : "DELETE" },
-							{ headers : { "Content-Type" : "application/json" }, body : JSON.stringify(data) /* JSON 객체데이터를 문자열화하여 HTTP Body에 담기 */ }
+							{ method : "PUT" ,
+							  headers : 
+							  { "Content-Type" : "application/json" }, 
+							  body : JSON.stringify(data) 
+							}
 					).then(function(result){
 						alert("성공")
 					}).catch(function(error){
