@@ -119,19 +119,45 @@ document.addEventListener("DOMContentLoaded", function(){
 </script>
 <section id="bbs-detail-header">
 	<article>
-	<a href="${rootPath}/upload/${BBSVO.b_file}" target="new"><img src="${rootPath}/upload/${BBSVO.b_file}" width="200px"></a>
+	<a href="${rootPath}/upload/${BBSVO.b_file}" target="new"></a>
+		<c:if test="${empty BBSVO.b_file}">
+			<img src="${rootPath}/static/files/NoImage.png" width="200px">
+		</c:if>
+		<c:if test="${not empty BBSVO.b_file}">
+			<img src="${rootPath}/upload/${BBSVO.b_file}" width="200px">
+		</c:if>		
 	</article>
 	<article>
 		<div class="title">제목</div><div class="content">${BBSVO.b_subject}</div>
 		<div class="title">작성일시</div><div class="content">${BBSVO.b_date}, ${BBSVO.b_time}</div>
-		<div class="title">작성자</div><div class="content">${BBOSVO.b_writer}</div>
+		<div class="title">작성자</div><div class="content">${BBSVO.b_writer}</div>
 	</article>
 </section>
 <section id="bbs-detail-body">
-${BBOVO.b_content}
+${BBSVO.b_content}
 </section>
 <section id="bbs-btn-box">
 	<button class="list">리스트</button>
 	<button class="update">수정</button>
 	<button class="delete">삭제</button>
+</section>
+
+<style>
+	section#images-box {
+		width: 50%;
+		margin: 10px auto;
+		padding: 5px;
+	}
+	
+	section#images-box img {
+		margin: 3px;
+		border-radius: 20px;
+	}
+</style>
+<section id="images-box">
+	<c:if test="${not empty BBSVO.images}">
+		<c:forEach items="${BBSVO.images}" var="image">
+			<img alt="이미지" src="${rootPath}/upload/${image.i_file_name}" height="100px">
+		</c:forEach>
+	</c:if>
 </section>

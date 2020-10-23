@@ -126,6 +126,11 @@
 			<input name="file" type="file" accept="image/*">
 		</div>
 		
+		<div style="margin-top: 10px;">
+			<label for="files">멀티이미지</label>
+			<input name="files" type="file" accept="image/*" multiple="multiple">
+		</div>
+		
 		<div class="btn-box">
 			<button type="button" id="list">리스트</button>
 			<button type="submit" id="save">저장</button>

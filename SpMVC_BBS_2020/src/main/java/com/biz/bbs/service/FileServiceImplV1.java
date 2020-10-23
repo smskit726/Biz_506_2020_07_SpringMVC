@@ -5,9 +5,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.biz.bbs.model.ImageVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -57,5 +61,11 @@ public class FileServiceImplV1 implements FileService{
 	public boolean fileDelete(String b_file) {
 		
 		return false;
+	}
+
+	@Override
+	public List<ImageVO> filesUp(MultipartHttpServletRequest files) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
