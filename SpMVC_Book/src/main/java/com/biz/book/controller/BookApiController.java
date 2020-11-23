@@ -2,6 +2,7 @@ package com.biz.book.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +24,7 @@ public class BookApiController {
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String insert(BookVO bookVO) {
+	public String insert(@RequestBody BookVO bookVO) {
 		
 		log.debug("BOOKVO >> " + bookVO.toString());
 		bService.insert(bookVO);
