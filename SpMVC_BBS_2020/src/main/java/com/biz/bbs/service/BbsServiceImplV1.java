@@ -57,7 +57,7 @@ public class BbsServiceImplV1 implements BbsService{
 	public int delete(long long_seq) {
 		
 		/*
-		 * 첨푸파일이 있는 게시판의 데이터를 삭제할 때는
+		 * 첨부파일이 있는 게시판의 데이터를 삭제할 때는
 		 * 1. seq에 해당하는 VO를 dao에서 findBySeq() 하고
 		 * 2. 파일이름을 fileDelete()로 보내서 파일을 먼저 삭제
 		 * 3. 게시판 데이터를 삭제
@@ -81,7 +81,7 @@ public class BbsServiceImplV1 implements BbsService{
 	@Override
 	public List<String> insert(BbsVO bbsVO, MultipartHttpServletRequest files) {
 		/*
-		 * 업로드된 멀티파일 정보에서 개별 파일들ㅇ르 List에 추출
+		 * 업로드된 멀티파일 정보에서 개별 파일들을 List에 추출
 		 * file.getFiles(이름) : "이름" 은 input tag의 name값을 지정
 		 */
 		List<MultipartFile> fileList = files.getFiles("files");
