@@ -36,7 +36,7 @@
             <prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
             <prop key="hibernate.show_sql">true</prop>
             <prop key="hibernate.format_sql">true</prop>
-            <prop key="hibernate.use_sqlcomments">true</prop>
+            <prop key="hibernate.use_sql_comments">true</prop>
             <prop key="hibernate.id.new_generator_mapping">true</prop>
             <prop key="hibernate.hbm2ddl.auto">create</prop>
             <prop key="use_new_generator_mapping">true</prop>
@@ -44,5 +44,4 @@
       </property>
    </bean>
    <jpa:repositories base-package="com.biz.book.repository" />
-   
 </beans>

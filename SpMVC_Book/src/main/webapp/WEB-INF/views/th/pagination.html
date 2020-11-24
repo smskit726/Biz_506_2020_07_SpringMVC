@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<section class="page center">
+	<ul class="pagination justify-content-center"
+		th:with="start=${ T(Math).floor(BOOKS.number/10) * 10 + 1 },
+					last = (${start + 9 < BOOKS.totalPages ? start + 9 : BOOKS.totalPages})">
+					
+		<li class="page-item">
+			<a th:href="@{/book/list(size=${BOOKS.size}, page=1)}" class="page-link"
+				aria-label="First">처음</a>
+		</li>
+		
+		<li th:class="${BOOKS.first} ? 'page-item disabled' : 'page-item'">
+			<a th:href="@{/book/list(size=${BOOKS.size}, page=${BOOKS.number})}" class="page-link"
+				aria-label="Previous">&lt;</a>
+		</li>
+		
+		
+		<li th:each="page : ${#numbers.sequence(start,last)}"
+			th:class="${page == BOOKS.number + 1} ? 'page-item active' : 'page-item'">
+			<a th:href="@{/book/list(size=${BOOKS.size}, page=${page})}" class="page-link" th:text="${page}"></a>
+		</li>
+		
+		<li th:class="${BOOKS.last} ? 'page-item disabled' : 'page-item'">
+			<a th:href="@{/book/list(size=${BOOKS.size}, page=${BOOKS.number +2})}" class="page-link"
+				aria-label="Next">&gt;</a>
+		</li>
+		
+		<li class="page-item">
+			<a th:href="@{/book/list(size=${BOOKS.size}, page=${BOOKS.totalPages})}" class="page-link"
+				aria-label="Last">끝</a>
+		</li>
+	</ul>
+</section>
+</html>
