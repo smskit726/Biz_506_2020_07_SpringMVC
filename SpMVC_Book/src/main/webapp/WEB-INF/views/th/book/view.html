@@ -1,5 +1,5 @@
 <th:block th:include="header"/>
-<script>
+<script th:inline="javascript">
     document.addEventListener("DOMContentLoaded",function(){
         document.querySelector("div.btn-box").addEventListener("click", function(e){
             let className= e.target.className
@@ -8,12 +8,18 @@
 
             if(className === 'btn-delete') {
                 if(confirm("정말 삭제할까요?")){
-                    document.location.replace(`/book/delete/${id}`)
+                	/*<![CDATA[*/
+                	let url = /*[[@{/book/delete/}]]*/
+                    document.location.replace(`${url}${id}`)
+                    /*]]*/
                 }
             }
             
             if(className === "btn-update"){
-            	document.location.href = `/book/update/${id}`
+            	/*<![CDATA[*/
+            	let url = /*[[@{/book/update/}]]*/
+            	document.location.href = `${url}?id=${id}`
+            	/*]]*/
             }
         })
     })
