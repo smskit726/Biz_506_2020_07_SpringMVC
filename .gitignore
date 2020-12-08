@@ -142,3 +142,6 @@ RemoteSystemsTempFiles/
 
 # Naver API Key
 NaverSecret.*
+
+# GoData API
+DataGoConfig.*
