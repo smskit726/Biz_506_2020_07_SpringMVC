@@ -13,7 +13,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BisStation {
+public class BisStationData {
 
 	/*
 	 * {
@@ -28,10 +28,13 @@ public class BisStation {
 	 * }
 	 */
 	
-	private String STATION_NUM;
-	private String BUSSTOP_ID;
-	private String BUSSTOP_NAME;
-	private String NAME_E;
-//	private String ARS_ID;
-//	private String NEXT_BUSSTOP;
+	public String STATION_NUM;
+	public String BUSSTOP_ID;
+	public String BUSSTOP_NAME;
+	public String NAME_E;
+	public String ARS_ID;
+	public String NEXT_BUSSTOP;
+	public String LONGITUDE;
+	public String LATITUDE;
+
 }

@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+article.station {
+	width:40%;
+	border:1px solid #ddd;
+	box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+
+table.station-list {
+	width: 90%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	border: 1px solid #ccc;
+	margin : 0 auto;
+}
+
+table.station-list thead tr {
+	border-bottom: 1px solid #ccc;
+}
+
+table.staion-list th {
+	text-align: left;
+}
+
+table.station-list tbody tr:nth-child(even) {
+	background-color: #ccc;
+}
+table.station-list tbody tr:nth-child(odd) {
+	background-color: #fff;
+}
+
+table.station-list tbody tr:hover {
+	background-color: #ddd;
+	cursor: pointer;
+}
+
+table.station-list td, table.station-list th {
+	padding: 8px;
+	vertical-align: top;
+	white-space: nowrap; /* table의 text를 줄바꿈하지 말라 */
+}

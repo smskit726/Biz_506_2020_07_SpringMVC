@@ -1,8 +1,8 @@
-package com.biz.data.model;
+package com.biz.data.model.pet;
 
 import java.util.List;
 
-public class RestList {
+public class PetList {
 
 	public List<GoPetVO> list;
 }

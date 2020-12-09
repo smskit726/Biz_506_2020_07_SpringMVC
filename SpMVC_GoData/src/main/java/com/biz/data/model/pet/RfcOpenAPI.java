@@ -1,9 +1,9 @@
-package com.biz.data.model;
+package com.biz.data.model.pet;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "rfcOpenApi")
 public class RfcOpenAPI {
 
-	public RestBody body;
+	public PetBody body;
 }
