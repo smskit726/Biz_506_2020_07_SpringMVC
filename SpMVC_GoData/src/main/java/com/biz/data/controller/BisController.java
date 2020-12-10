@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.biz.data.model.BisDestVO;
 import com.biz.data.model.BisStationData;
 import com.biz.data.service.BisService;
 
@@ -49,13 +50,13 @@ public class BisController {
 	// BUSSTOP_ID값으로 도착정보 찾아오기
 	@ResponseBody
 	@RequestMapping(value = "/busstop", method = RequestMethod.POST)
-	public String busstop(@RequestBody Map<String, String> data) {
+	public List<BisDestVO> busstop(@RequestBody Map<String, String> data) {
 
 		log.debug("BUSSTOP " + data.get("station"));
 
-		bService.busstop(data.get("station"));
+		List<BisDestVO> arrList = bService.busstop(data.get("station"));
 
-		return "OK";
+		return arrList;
 
 	}
 

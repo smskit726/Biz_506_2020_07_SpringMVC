@@ -8,9 +8,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>공공DB 활용</title>
-<link href="${rootPath}/static/css/index.css?ver=002" rel="stylesheet"/>
+<link href="${rootPath}/static/css/index.css?ver=001" rel="stylesheet"/>
 <script>
 document.addEventListener("DOMContentLoaded",function(){
+	
+	document.querySelector("#btn-home").addEventListener("click", function(){
+		document.location.href = "${rootPath}/"
+	})
+	
 	const menu_station = document.querySelector("nav.main-nav .get-station")
 	menu_station.onclick = function(){
 		document.location.href="${rootPath}/bis/station"
@@ -41,7 +46,7 @@ document.addEventListener("DOMContentLoaded",function(){
 	</header>
 	<nav class="main-nav">
 		<ul>
-			<li>Home</li>
+			<li id="btn-home">Home</li>
 			<li>
 				<form>
 					<select name="cat">
@@ -59,13 +64,14 @@ document.addEventListener("DOMContentLoaded",function(){
 			<li class="get-station">노선정보가져오기</li>
 		</ul>
 	</nav>
-	
-	<c:if test="${BODY == 'STATION'}">
-		<%@ include file = "/WEB-INF/views/station_view.jspf"%>
-	</c:if>
-	<c:if test="${BODY == 'PET'}">
-		<%@ include file = "/WEB-INF/views/hosp_view.jspf"%>
-	</c:if>
-	
+	<section class="main-body">
+		<c:if test="${BODY == 'STATION'}">
+			<%@ include file = "/WEB-INF/views/station_view.jspf"%>
+			<%@ include file = "/WEB-INF/views/busstop_view.jspf"%>
+		</c:if>
+		<c:if test="${BODY == 'PET'}">
+			<%@ include file = "/WEB-INF/views/hosp_view.jspf"%>
+		</c:if>
+	</section>
 </body>
 </html>

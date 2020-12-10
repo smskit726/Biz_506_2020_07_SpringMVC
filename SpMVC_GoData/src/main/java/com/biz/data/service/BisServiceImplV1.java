@@ -100,7 +100,7 @@ public class BisServiceImplV1 implements BisService {
 
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.debug("URI Syntax Error");
 		}
 		return null;
 	}
@@ -126,7 +126,7 @@ public class BisServiceImplV1 implements BisService {
 
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.debug("URI Syntax Error");
 		}
 		return null;
 	}
@@ -140,7 +140,7 @@ public class BisServiceImplV1 implements BisService {
 			queryString += "&BUSSTOP_ID=" + URLEncoder.encode(station,"UTF-8");
 		} catch (UnsupportedEncodingException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			log.debug("Encoding Error");
 		}
 
 		RestTemplate restTemp = new RestTemplate();
@@ -166,7 +166,7 @@ public class BisServiceImplV1 implements BisService {
 			
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.debug("URI Syntax Error");
 		}
 		return null;
 	}
